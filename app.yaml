@@ -8,6 +8,9 @@ handlers:
 - url: /css
   static_dir: css
 
+- url: /font
+  static_dir: font
+
 - url: /_ah/mail/save.+
   script: main.save
   login: admin

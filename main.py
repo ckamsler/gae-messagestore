@@ -15,7 +15,7 @@ JINJA_ENV = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__
 class ReceiveMailHandler(InboundMailHandler):
 	def receive(self, mail):
 		if mail.sender:
-			bodies = mail.bodies('text/plain')
+			bodies = mail.bodies('text/html')
 			body_text = ''
 			for content_type, body in bodies:
 				body_text += body.decode()

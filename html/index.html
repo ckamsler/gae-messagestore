@@ -2,15 +2,19 @@
 {% autoescape true %}
 <html>
   <head>
+    <meta charset="utf-8">
   	<title>Saved Messages</title>
-  	<link rel="stylesheet" href="/css/main.css" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="/css/topcoat-desktop-light.min.css">
+  	<link rel="stylesheet" type="text/css" href="/css/page.css" />
+    
   </head>	
-  <body>
+  <body class='light'>
     {% for msg in messages %}
-    	<div class='message'>
-  			<h2>{{ msg.subject }}</h2>
-  			<p>{{ msg.body }}</p>
-		  </div>
+    <div class='message'>
+    	<header><h2>{{ msg.subject }}</h2></header>
+  		<p>{{ msg.body }}</p>		  
+    </div>
     {% endfor %}
   </body>
 </html>
