@@ -1,4 +1,4 @@
 gae-messagestore
 ================
 
-Post stuff to GAE
+Post stuff to GAE via email

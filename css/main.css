@@ -1,0 +1,15 @@
+.message {  
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 30px;
+	padding: 20px;
+}
+
+.message > h2 {
+	margin: 0 0 5px 0;
+	padding: 0;
+}
+
+.message > p {
+	margin: 0;
+	padding: 0;
+}

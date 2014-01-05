@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+  	<title>Saved Messages</title>
+  	<link rel="stylesheet" href="/css/main.css" type="text/css" />
+  </head>	
+  <body>
+    {% for msg in messages %}
+    	<div class='message'>
+  			<h2>{{ msg.subject }}</h2>
+  			<p>{{ msg.body }}</p>
+		  </div>
+    {% endfor %}
+  </body>
+</html>
+{% endautoescape %}
