@@ -1,7 +1,9 @@
 import os
 import webapp2
 import jinja2
+import re
 
+from google.appengine.api import mail
 from google.appengine.ext import ndb
 from google.appengine.ext.webapp.mail_handlers import InboundMailHandler
 from models import MailMessage
@@ -13,15 +15,15 @@ JINJA_ENV = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__
 
 # Mail Receiver
 class ReceiveMailHandler(InboundMailHandler):
-	def receive(self, mail):
-		if mail.sender:
-			bodies = mail.bodies('text/html')
-			body_text = ''
-			for content_type, body in bodies:
-				body_text += body.decode()
+	def receive(self, message):
+		if message.sender and mail.is_email_valid(message.sender):			
+			body_text = message.body.decode()
+			match = re.search(r'[\w\.-]+@[\w\.-]+', message.sender)
 
-			m = MailMessage(name=hash_string(mail.sender), subject=mail.subject, body=body_text)
-			m.put()
+			if match:
+				hash_name = hash_string(match.group())				
+				m = MailMessage(name=hash_name, subject=message.subject, body=body_text)
+				m.put()
 
 # Pages
 class MainPage(webapp2.RequestHandler):
@@ -31,6 +33,7 @@ class MainPage(webapp2.RequestHandler):
 
 		template = JINJA_ENV.get_template('html/index.html')
 		self.response.write(template.render({
+			'name': name,
 			'messages': messages
 		}))
 
