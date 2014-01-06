@@ -9,7 +9,7 @@ class MailMessage(ndb.Model):
 	@classmethod
 	def query_by_name(self, name):
 		if name:
-			query = self.query(MailMessage.name==name).order(-self.date)
+			query = self.query(MailMessage.name==name)
 		else:
 			query = self.query()
 
