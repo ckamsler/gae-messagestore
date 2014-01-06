@@ -7,11 +7,14 @@ from google.appengine.api import mail
 from google.appengine.ext import ndb
 from google.appengine.ext.webapp.mail_handlers import InboundMailHandler
 from models import MailMessage
-from utils import hash_string
+from utils import hash_string, format_date
 
 JINJA_ENV = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
+
+
+JINJA_ENV.filters['date'] = format_date
 
 # Mail Receiver
 class ReceiveMailHandler(InboundMailHandler):
@@ -33,7 +36,6 @@ class MainPage(webapp2.RequestHandler):
 
 		template = JINJA_ENV.get_template('html/index.html')
 		self.response.write(template.render({
-			'name': name,
 			'messages': messages
 		}))
 

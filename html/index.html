@@ -10,13 +10,12 @@
     
   </head>	
   <body class='light'>
-    {% if name %}
-    <h1>{{ name }}</h1>
-    {% endif %}
-
     {% for msg in messages %}
     <div class='message'>
-    	<header><h2>{{ msg.subject }}</h2></header>
+      <p class='date'>{{ msg.date|date }}</p>
+    	<header>
+        <h2>{{ msg.subject }}</h2>
+      </header>      
   		<p>{{ msg.body|safe }}</p>		  
     </div>
     {% endfor %}
